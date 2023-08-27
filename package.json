@@ -6,29 +6,40 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "^7",
-    "express": "^4",
-    "@sap/cds-hana": "^2"
+    "@sap/audit-logging": "^5.7.1",
+    "@sap/cds": "^7.1.2",
+    "@sap/cds-hana": "^2",
+    "@sap/hana-client": "^2.17.22",
+    "@sap/xsenv": "^4.0.0",
+    "@sap/xssec": "^3.3.3",
+    "express": "^4.18.2",
+    "passport": "^0.6.0"
   },
   "scripts": {
     "start": "cds-serve"
   },
   "cds": {
     "build": {
-        "tasks": [
-            {
-                "for": "hana",
-                "dest": "../db"
-            },
-            {
-                "for": "node-cf"
-            }
-        ]
+      "tasks": [
+        {
+          "for": "hana",
+          "dest": "../db"
+        },
+        {
+          "for": "node-cf"
+        }
+      ]
     },
     "requires": {
-        "db": {
-            "kind": "hana-cloud"
-        }
+      "db": {
+        "kind": "hana-cloud"
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
     }
+  },
+  "devDependencies": {
+    "@sap/hdi-deploy": "4.8.0"
   }
 }
