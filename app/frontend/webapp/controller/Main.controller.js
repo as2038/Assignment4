@@ -6,10 +6,11 @@ sap.ui.define([
      */
     function (Controller) {
         "use strict";
-
+        let PRINum = 10;
         return Controller.extend("frontend.controller.Main", {
             onInit: function () {
                 let status = "NEW"
+                
                 let data = [];
 
                 let mylocaljsonModel = new sap.ui.model.json.JSONModel(data);
@@ -65,13 +66,12 @@ sap.ui.define([
                 myModel.setData(OldData);
                 myModel.refresh();
 
-                //alert(data.getSize());
-                sap.ui.getCore().byId(this.createId("l8")).setText("Items ("+OldData.length+")");
             },
             onAddButton: function () {
+                let newPRIID = "0".repeat(5-PRINum.toString().length)+ PRINum.toString();
                 let myNewData = {
                     
-                    "PRIID": "IA123",
+                    "PRIID": newPRIID,
                     "Material_Num": "",
                     "Material_Desc": "",
                     "Quantity": "",
@@ -81,15 +81,12 @@ sap.ui.define([
                     "Tax_Amount": ""
 
                 }
-
+                PRINum += 10;
                 let myModel = this.getView().getModel("mylocaljsonModel");
                 let OldData = myModel.getData();
                 OldData.push(myNewData);
                 myModel.setData(OldData);
                 myModel.refresh();
-
-                //alert(data.getSize());
-                sap.ui.getCore().byId(this.createId("l8")).setText("Items ("+OldData.length+")");
             },
             onDelete:function(){
                 let myModel = this.getView().getModel("mylocaljsonModel");
@@ -106,3 +103,4 @@ sap.ui.define([
             }
         });
     });
+ 

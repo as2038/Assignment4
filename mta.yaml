@@ -65,23 +65,13 @@ modules:
     build-result: resources
     requires:
     - artifacts:
-      - comsapassignment4.zip
-      name: comsapassignment4
+      - frontend.zip
+      name: frontend
       target-path: resources/
     - artifacts:
       - frontend.zip
       name: frontend
       target-path: resources/
-- name: comsapassignment4
-  type: html5
-  path: app/assignment4
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
 - name: frontend
   type: html5
   path: app/frontend

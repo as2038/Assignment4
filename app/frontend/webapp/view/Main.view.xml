@@ -43,19 +43,19 @@
             >
                 <f:content>
                     <Label text="Purchase Requisition ID" />
-                    <Input value="{OrderID} " id="OrderId"/>
+                    <Input value="{PRID} " id="PRIDId"/>
 
                     <Label text="Supplier" />
-                    <Input value="{CustomerID}" id="CustomerId"/>
+                    <Input value="{Supplier}" id="SupplierId"/>
 
                     <Label text="Company Code" />
-                    <Input value="{ShipAddress}" id="ShipAddressId"/>
+                    <Input value="{CompanyCode}" id="CompanyCodeId"/>
 
                     <Label text="Purchasing Organisation" />
-                    <Input value="{ShipCity}" id="ShipCityId"/>
+                    <Input value="{PurchOrg}" id="PurchOrgId"/>
 
                     <Label text="Purchasing Group" />
-                    <Input value="{ShipCountry}" id="PurchGroupId"/>
+                    <Input value="{PurchGroup}" id="PurchGroupId"/>
 
                     <Label text="Status" />
                     <Input value="NEW" editable="false" id="StatusId"/>

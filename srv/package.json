@@ -17,7 +17,7 @@
         "start": "cds serve srv/csn.json"
     },
     "engines": {
-        "node": "14.X"
+        "node": "20.X"
     },
     "cds": {
         "build": {
