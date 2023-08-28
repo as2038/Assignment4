@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CatalogService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Interactions_Header" EntityType="CatalogService.Interactions_Header">
+                    <NavigationPropertyBinding Path="ITEMS" Target="Interactions_Items"/>
+                </EntitySet>
+                <EntitySet Name="Interactions_Items" EntityType="CatalogService.Interactions_Items">
+                    <NavigationPropertyBinding Path="INTHeader" Target="Interactions_Header"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="Interactions_Header">
+                <Key>
+                    <PropertyRef Name="PR_ID"/>
+                </Key>
+                <Property Name="PR_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <NavigationProperty Name="ITEMS" Type="Collection(CatalogService.Interactions_Items)" Partner="INTHeader">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="SUPPLIER" Type="Edm.String" MaxLength="10"/>
+                <Property Name="COMPANY_CODE" Type="Edm.String" MaxLength="4"/>
+                <Property Name="PURCH_ORG" Type="Edm.String" MaxLength="4"/>
+                <Property Name="PURCH_GROUP" Type="Edm.String" MaxLength="10"/>
+                <Property Name="STATUS" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="Interactions_Items">
+                <Key>
+                    <PropertyRef Name="INTHeader_PR_ID"/>
+                    <PropertyRef Name="PRI_ID"/>
+                </Key>
+                <NavigationProperty Name="INTHeader" Type="CatalogService.Interactions_Header" Partner="ITEMS">
+                    <ReferentialConstraint Property="INTHeader_PR_ID" ReferencedProperty="PR_ID"/>
+                </NavigationProperty>
+                <Property Name="INTHeader_PR_ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="PRI_ID" Type="Edm.String" MaxLength="5" Nullable="false"/>
+                <Property Name="MATERIAL_NUM" Type="Edm.String" MaxLength="18"/>
+                <Property Name="MATERIAL_DESC" Type="Edm.String" MaxLength="40"/>
+                <Property Name="QUANTITY" Type="Edm.Decimal" Scale="2" Precision="15"/>
+                <Property Name="QUANTITY_UNIT" Type="Edm.String" MaxLength="3"/>
+                <Property Name="NET_PRICE" Type="Edm.Decimal" Scale="2" Precision="15"/>
+                <Property Name="CURRENCY_KEY" Type="Edm.String" MaxLength="3"/>
+                <Property Name="TAX_AMOUNT" Type="Edm.Decimal" Scale="2" Precision="15"/>
+            </EntityType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

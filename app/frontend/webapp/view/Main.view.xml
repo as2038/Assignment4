@@ -1,0 +1,128 @@
+<mvc:View controllerName="frontend.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+	xmlns:u="sap.ui.unified"
+	xmlns:c="sap.ui.core"
+     displayBlock="true"
+    xmlns="sap.m" height="100%">
+    <Page id="page" title="{i18n>title}">
+			<OverflowToolbar>
+                <Label text="Find Requisition:" id="l1"/>
+                <SearchField id="searchField" width="25%" search=".onSearch"/>
+				<Button
+                    text="Save"
+                    type="Accept"
+                    press="onSave"
+                    id="save"
+                />
+                <Button
+                    text="Submit"
+                    type="Transparent"
+                    press="onSubmit"
+                    id="submit"
+                />
+			</OverflowToolbar>
+        <content>
+            <f:SimpleForm
+                id="SimpleFormChange354"
+                editable="true"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="3"
+                labelSpanL="3"
+                labelSpanM="3"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="4"
+                emptySpanL="4"
+                emptySpanM="4"
+                emptySpanS="0"
+                columnsXL="1"
+                columnsL="1"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="Purchase Requisition ID" />
+                    <Input value="{OrderID} " id="OrderId"/>
+
+                    <Label text="Supplier" />
+                    <Input value="{CustomerID}" id="CustomerId"/>
+
+                    <Label text="Company Code" />
+                    <Input value="{ShipAddress}" id="ShipAddressId"/>
+
+                    <Label text="Purchasing Organisation" />
+                    <Input value="{ShipCity}" id="ShipCityId"/>
+
+                    <Label text="Purchasing Group" />
+                    <Input value="{ShipCountry}" id="PurchGroupId"/>
+
+                    <Label text="Status" />
+                    <Input value="NEW" editable="false" id="StatusId"/>
+                </f:content>
+            </f:SimpleForm>
+            <Toolbar>
+            <Label text="Items" id="l0" class="largeLabel"/>
+            <Button
+                    text="Add"
+                    type="Transparent"
+                    icon="sap-icon://add"
+                    press="onAddButton"
+                    id="add"
+                />
+                <Button
+                    text="Delete"
+                    icon="sap-icon://delete"
+                    type="Transparent"
+                    press="onDelete"
+                    id="delete"
+                />
+            </Toolbar>
+            <Table items="{mylocaljsonModel>/}"
+            id="t1"
+            mode="SingleSelectLeft"
+            class="tablePadding">
+                <columns>
+                    <Column id="c1">
+                        <Text text="PRI ID" id="txt1" />
+                    </Column>
+                    <Column id="c2">
+                        <Text text="Material Num" id="txt2" />
+                    </Column>
+                    <Column id="c3">
+                        <Text text="Material Desc" id="txt3" />
+                    </Column>
+                    <Column id="c4">
+                        <Text text="Quantity" id="txt4" />
+                    </Column>
+                    <Column id="c5">
+                        <Text text="Quantity Unit" id="txt5" />
+                    </Column>
+                    <Column id="c6">
+                        <Text text="Net Price" id="txt6" />
+                    </Column>
+                    <Column id="c7">
+                        <Text text="Currency Key" id="txt7" />
+                    </Column>
+                    <Column id="c8">
+                        <Text text="Tax Amount" id="txt8" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem1" vAlign="Middle">
+                        <cells>
+                            <Text text="{mylocaljsonModel>PRIID}" />
+                            <Input value="{mylocaljsonModel>Material_Num}" />
+                            <Input value="{mylocaljsonModel>Material_Desc}" />
+                            <Input value="{mylocaljsonModel>Quantity}" />
+                            <Input value="{mylocaljsonModel>Quantity_Unit}" />
+                            <Input value="{mylocaljsonModel>Net_Price}" />
+                            <Input value="{mylocaljsonModel>Currency_Key}" />
+                            <Input value="{mylocaljsonModel>Tax_Amount}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,45 +1,52 @@
 {
-  "name": "Assignment4",
-  "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "@sap/audit-logging": "^5.7.1",
-    "@sap/cds": "^7.1.2",
-    "@sap/cds-hana": "^2",
-    "@sap/hana-client": "^2.17.22",
-    "@sap/xsenv": "^4.0.0",
-    "@sap/xssec": "^3.3.3",
-    "express": "^4.18.2",
-    "passport": "^0.6.0"
-  },
-  "scripts": {
-    "start": "cds-serve"
-  },
-  "cds": {
-    "build": {
-      "tasks": [
-        {
-          "for": "hana",
-          "dest": "../db"
+    "name": "Assignment4",
+    "version": "1.0.0",
+    "description": "A simple CAP project.",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/audit-logging": "^5.7.1",
+        "@sap/cds": "^7.1.2",
+        "@sap/cds-hana": "^2",
+        "@sap/hana-client": "^2.17.22",
+        "@sap/xsenv": "^4.0.0",
+        "@sap/xssec": "^3.3.3",
+        "express": "^4.18.2",
+        "passport": "^0.6.0"
+    },
+    "scripts": {
+        "start": "cds-serve",
+        "watch-assignment4": "cds watch --open assignment4/webapp/index.html?sap-ui-xx-viewCache=false",
+        "undeploy": "cf undeploy Assignment4 --delete-services --delete-service-keys --delete-service-brokers",
+        "build": "rimraf resources mta_archives && mbt build --mtar archive",
+        "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+        "watch-frontend": "cds watch --open frontend/webapp/index.html?sap-ui-xx-viewCache=false"
+    },
+    "cds": {
+        "build": {
+            "tasks": [
+                {
+                    "for": "hana",
+                    "dest": "../db"
+                },
+                {
+                    "for": "node-cf"
+                }
+            ]
         },
-        {
-          "for": "node-cf"
+        "requires": {
+            "db": {
+                "kind": "hana-cloud"
+            }
+        },
+        "hana": {
+            "deploy-format": "hdbtable"
         }
-      ]
     },
-    "requires": {
-      "db": {
-        "kind": "hana-cloud"
-      }
-    },
-    "hana": {
-      "deploy-format": "hdbtable"
+    "devDependencies": {
+        "@sap/hdi-deploy": "4.8.0",
+        "@sap/ux-specification": "^1.108.12",
+        "rimraf": "^3.0.2"
     }
-  },
-  "devDependencies": {
-    "@sap/hdi-deploy": "4.8.0"
-  }
 }
