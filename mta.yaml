@@ -14,8 +14,10 @@ modules:
     properties:
       srv-url: ${default-url}
   parameters:
+    host: ${appname}
     buildpack: nodejs_buildpack
   build-parameters:
+    ignore: [".env", "./node_modules"]
     builder: npm
 - name: Assignment4-db-deployer
   type: hdb
@@ -23,6 +25,7 @@ modules:
   requires:
   - name: Assignment4-db
   parameters:
+    ignore: [".env", "./node_modules"]
     buildpack: nodejs_buildpack
 - name: Assignment4-destination-content
   type: com.sap.application.content
@@ -101,6 +104,13 @@ resources:
             ProxyType: Internet
             Type: HTTP
             URL: https://ui5.sap.com
+          - Name: hana-app-api
+            Authentication: NoAuthentication
+            ProxyType: Internet
+            HTML5.ForwardAuthToken: true
+            HTML5.DynamicDestination: true
+            Type: HTTP
+            URL: https://${appname}.${default-domain}
           - Authentication: NoAuthentication
             HTML5.DynamicDestination: true
             HTML5.ForwardAuthToken: true
@@ -131,6 +141,7 @@ resources:
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
+  appname: unique-19b32423
 build-parameters:
   before-all:
   - builder: custom

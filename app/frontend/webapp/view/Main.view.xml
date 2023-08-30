@@ -12,13 +12,13 @@
 				<Button
                     text="Save"
                     type="Accept"
-                    press="onSave"
+                    press="onSaveButton"
                     id="save"
                 />
                 <Button
                     text="Submit"
                     type="Transparent"
-                    press="onSubmit"
+                    press="onSubmitButton"
                     id="submit"
                 />
 			</OverflowToolbar>

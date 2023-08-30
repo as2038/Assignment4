@@ -4,20 +4,26 @@ sap.ui.define([
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller) {
+    function (BaseController, UIComponent, MessageBox, MessageToast) {
         "use strict";
         let PRINum = 10;
-        return Controller.extend("frontend.controller.Main", {
+        return BaseController.extend("frontend.controller.Main", {
+            
             onInit: function () {
-                let status = "NEW"
                 
                 let data = [];
 
                 let mylocaljsonModel = new sap.ui.model.json.JSONModel(data);
                 this.getView().setModel(mylocaljsonModel,"mylocaljsonModel");
+
             },
             onSearch: function () {
                 alert("Not Found");
+            },
+            onSaveButton: function () {
+
+                MessageBox.error("Error saving data");
+
             },
             onSubmitButton: function () {
                 
@@ -50,13 +56,14 @@ sap.ui.define([
                 }
                 let myNewData = {
                     
-                    "ProductId": productIdEntry,
-                    "Product":productNameEntry,
-                    "Supplier": supplierNameEntry,
-                    "Quantity": quantityEntry,
-                    "OrderDate": dateEntry,
-                    "NeedUrgent": urgentEntry,
-                    "StoreWarehouse": whereEntry
+                    "PRIID": newPRIID,
+                    "Material_Num": "",
+                    "Material_Desc": "",
+                    "Quantity": "",
+                    "Quantity_Unit": "",
+                    "Net_Price": "",
+                    "Currency_Key": "",
+                    "Tax_Amount": ""
                     
                 }
 
